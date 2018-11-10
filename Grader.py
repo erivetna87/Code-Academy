@@ -23,6 +23,7 @@ def average(numbers):
   total = float(total)
   return total/len(numbers)
 
+#Weighted Average of Homework(10%)/Quizzes(30%)/Tests(60%) 
 def get_average(student):
   homework = average(student["homework"])
   quizzes = average(student["quizzes"])

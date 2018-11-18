@@ -33,7 +33,7 @@
 
 import requests, webbrowser, bs4, sys
 
-#URLs or Data Points
+#URLs for Data Points
 popUrl = 'https://www.beeradvocate.com/lists/popular/'
 topUrl = 'https://www.beeradvocate.com/lists/top/'
 

@@ -12,26 +12,7 @@
 #beerRatings
 #beerScore
 
-#Initial beginning approach maintained for reference
-
-#Request URL
-#resPop = requests.get(popUrl)
-#resTop = requests.get(topUrl)
-
-#Exception Monitoring
-#resPop.raise_for_status()
-#resTop.raise_for_status()
-
-#passes URLs into BeautifulSoup Object
-#popBeers = bs4.BeautifulSoup(resPop.text, "lxml")
-#topBeers = bs4.BeautifulSoup(resTop.text, "lxml")
-
-#beerNameElems = requestUrl(popUrl).select('a b')
-#beerBrewerElems = requestUrl(popUrl).select('.muted a')
-
-#print (beerNameElems)
-
-import requests, webbrowser, bs4, sys
+import requests, webbrowser, bs4, sys, re
 
 #URLs for Data Points
 popUrl = 'https://www.beeradvocate.com/lists/popular/'
@@ -49,44 +30,29 @@ def selectElements(url,selectMethod):
     bsSelectElem = requestUrl(url).select(selectMethod)
     return bsSelectElem
 
-#Useful for certain websites that have poor HTML structure.
-def stringSlice(elems,startIndex,endIndex):
-    elemsStr = str(elems)
-    start = elemsStr.find(startIndex) + 1
-    end = elemsStr.find(endIndex, start)
-    print (elemsStr)
+#HTML Elements:
 
-
-
-
-#beerNameElems = selectElements(popUrl,'a b') - keep
-
+beerNameElems = selectElements(popUrl,'a b')
 beerBrewerElems = selectElements(popUrl,'span a')
-#print (beerBrewerElems)
-#stringSlice(beerBrewerElems,'','')
-print (beerBrewerElems)
+#TODO: beerDescription
+#TODO: beerABV
+#TODO: beerRatings
+#TODO beerScore
 
+#strips HTML from requestUrl(url).select(selectMethod)
+#TODO: May need to change enumerate & if not (index %2) may limit cross-functionality
+def htmlStrip(elem):
+    for index, i in (enumerate(elem)):
+        if not (index % 2):
+            elemStr = str(i)
+            elemStr = re.sub(r'<.*?>','', elemStr)
+            return (elemStr)
 
-#print (stringSlice(beerBrewerElems,'>','<'))
+#Raw listing of data points in a string:
 
+#Note: len(beerBrewerElems) is 504.
+#Last 2 elements irrelevant to Brewer's Name
+htmlStrip(beerBrewerElems[2:502])
 
-
-
-#Initial approach maintained for reference
-
-#Request URL
-#resPop = requests.get(popUrl)
-#resTop = requests.get(topUrl)
-
-#Exception Monitoring
-#resPop.raise_for_status()
-#resTop.raise_for_status()
-
-#passes URLs into BeautifulSoup Object
-#popBeers = bs4.BeautifulSoup(resPop.text, "lxml")
-#topBeers = bs4.BeautifulSoup(resTop.text, "lxml")
-
-#beerNameElems = requestUrl(popUrl).select('a b')
-#beerBrewerElems = requestUrl(popUrl).select('.muted a')
-
-#print (beerNameElems)
+#TODO: create a function that puts these items into a list -
+#May not need. Don't know if str vs. list matters (research point)

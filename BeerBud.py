@@ -40,7 +40,7 @@ beerBrewerElems = selectElements(popUrl,'span a')
 #TODO beerScore
 
 #strips HTML from requestUrl(url).select(selectMethod)
-#TODO: May need to change enumerate & if not (index %2) may limit cross-functionality
+#TODO: Likely need to change enumerate & if not (index % 2). Likelt will limit cross-functionality for raw HTML request.
 def htmlStrip(elem):
     for index, i in (enumerate(elem)):
         if not (index % 2):
@@ -52,6 +52,7 @@ def htmlStrip(elem):
 
 #Note: len(beerBrewerElems) is 504.
 #Last 2 elements irrelevant to Brewer's Name
+#TODO: Add beerNameElems. Assign each to variables.
 htmlStrip(beerBrewerElems[2:502])
 
 #TODO: create a function that puts these items into a list -

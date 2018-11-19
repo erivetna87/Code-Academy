@@ -31,7 +31,7 @@ def selectElements(url,selectMethod):
     return bsSelectElem
 
 #HTML Elements:
-
+#TODO: Get elements from topUrl
 beerNameElems = selectElements(popUrl,'a b')
 beerBrewerElems = selectElements(popUrl,'span a')
 #TODO: beerDescription

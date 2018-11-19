@@ -37,7 +37,7 @@ beerBrewerElems = selectElements(popUrl,'span a')
 #TODO: beerDescription
 #TODO: beerABV
 #TODO: beerRatings
-#TODO beerScore
+#TODO: beerScore
 
 #strips HTML from requestUrl(url).select(selectMethod)
 #TODO: Likely need to change enumerate & if not (index % 2). Likelt will limit cross-functionality for raw HTML request.

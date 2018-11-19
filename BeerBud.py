@@ -41,7 +41,7 @@ beerBrewerElems = selectElements(popUrl,'span a')
 
 #strips HTML from requestUrl(url).select(selectMethod)
 #this was probably a bad approach or there is a much simpler way. Talk to Brett on this.
-#TODO: Likely need to change enumerate & if not (index % 2). Likelt will limit cross-functionality for raw HTML request.
+#TODO: Need to change enumerate & if not (index % 2). lt will limit cross-functionality for different HTML requests.
 def htmlStrip(elem):
     for index, i in (enumerate(elem)):
         if not (index % 2):

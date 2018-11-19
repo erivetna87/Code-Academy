@@ -26,7 +26,8 @@ def requestUrl(url):
     return htmlData
 #Function to obtain specific elements from HTML. Both arguments must be strings
 def selectElements(url,selectMethod):
-    requestUrl(url)
+    #TODO: delete first line of function. initial intent to assign to variable but no need 
+    requestUrl(url) 
     bsSelectElem = requestUrl(url).select(selectMethod)
     return bsSelectElem
 

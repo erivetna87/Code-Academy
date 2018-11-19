@@ -1,6 +1,6 @@
 #! Python 3
 #Scraping Data From Beer Advocate
-#Flow:
+
 
 #Project 1 - Beer Bud Webscraper for data on popular beers from Beer Advocate
 

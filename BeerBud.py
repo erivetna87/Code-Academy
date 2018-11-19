@@ -52,8 +52,7 @@ def htmlStrip(elem):
 
 #Raw listing of data points in a string:
 
-#Note: len(beerBrewerElems) is 504.
-#Last 2 elements irrelevant to Brewer's Name. Cross checked completeness on website.
+#Note: len(beerBrewerElems) is 506. Last 2 elements irrelevant to Brewer's Name. Cross checked completeness on website.
 #TODO: Add beerNameElems. 
 #TODO: Assign each to variables.
 #TODO: Check for completeness of elements by doing a len/count/enumerate/whatever. All clean data elements should be 250 for popURL

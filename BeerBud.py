@@ -20,7 +20,7 @@ topUrl = 'https://www.beeradvocate.com/lists/top/'
 
 #Function to return all HTML data - Could this be improved? (Brett Qst)
 def requestUrl(url):
-    resUrl = requests.get(url) #why won't this pass the argument?
+    resUrl = requests.get(url) 
     resUrl.raise_for_status()
     htmlData = bs4.BeautifulSoup(resUrl.text, "lxml")
     return htmlData

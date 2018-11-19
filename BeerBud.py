@@ -56,7 +56,7 @@ def htmlStrip(elem):
 #Last 2 elements irrelevant to Brewer's Name. Cross checked completeness on website.
 #TODO: Add beerNameElems. 
 #TODO: Assign each to variables.
-#TODO: Check for completeness of by doing a len/count/enumerate/whatever. All clean data elements should be 250 for popURL
+#TODO: Check for completeness of elements by doing a len/count/enumerate/whatever. All clean data elements should be 250 for popURL
 htmlStrip(beerBrewerElems[2:502])
 
 #TODO: create a function that puts these items into a list

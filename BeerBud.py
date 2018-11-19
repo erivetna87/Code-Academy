@@ -56,4 +56,4 @@ def htmlStrip(elem):
 htmlStrip(beerBrewerElems[2:502])
 
 #TODO: create a function that puts these items into a list -
-#May not need. Don't know if str vs. list matters (research point)
+#May not need. Don't know if str vs. list matters. Likely to need list type for writing into .csv or tuple for SQL?

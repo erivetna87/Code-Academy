@@ -13,6 +13,7 @@
 #beerScore
 
 import requests, webbrowser, bs4, sys, re
+from pprint import pprint
 
 #URLs for Data Points
 popUrl = 'https://www.beeradvocate.com/lists/popular/'
@@ -20,44 +21,66 @@ topUrl = 'https://www.beeradvocate.com/lists/top/'
 
 #Function to return all HTML data - Could this be improved? (Brett Qst)
 def requestUrl(url):
-    resUrl = requests.get(url) 
+    resUrl = requests.get(url)
     resUrl.raise_for_status()
     htmlData = bs4.BeautifulSoup(resUrl.text, "lxml")
     return htmlData
 #Function to obtain specific elements from HTML. Both arguments must be strings
 def selectElements(url,selectMethod):
-    #TODO: delete first line of function. initial intent to assign to variable but no need 
-    requestUrl(url) 
     bsSelectElem = requestUrl(url).select(selectMethod)
     return bsSelectElem
 
+def beerABV(url):
+    numericRegex = re.compile(r'''
+    (\d+\.\d+%)
+    ''', re.VERBOSE)
+    foo = (requestUrl(url).getText())
+    result = numericRegex.findall(foo)
+    return (result)
+
 #HTML Elements:
 #TODO: Get elements from topUrl
-beerNameElems = selectElements(popUrl,'a b')
-beerBrewerElems = selectElements(popUrl,'span a')
-#TODO: beerDescription
-#TODO: beerABV
-#TODO: beerRatings
-#TODO: beerScore
+#Grabs Beer Name, Beer Brewer and Beer Type
+beerInfoElems = selectElements(popUrl,'td a')
+#Grab Beer ABV
+beer_ABV = beerABV(popUrl)
+#Grabs Rating and Score
+beerRankElems = selectElements(popUrl,'td b')
 
-#strips HTML from requestUrl(url).select(selectMethod)
-#this was probably a bad approach or there is a much simpler way. Talk to Brett on this.
-#TODO: Need to change enumerate & if not (index % 2). lt will limit cross-functionality for different HTML requests.
 def htmlStrip(elem):
-    for index, i in (enumerate(elem)):
-        if not (index % 2):
-            elemStr = str(i)
-            elemStr = re.sub(r'<.*?>','', elemStr)
-            return (elemStr)
+    result = []
+    for i in (elem):
+            elemStr = i.getText()
+            # elemStr = str(i)
+            # elemStr = re.sub(r'<.*?>','', elemStr)
+            result.append(elemStr)
+            #print(elemStr)
+    return result
 
-#Raw listing of data points in a string:
-
-#Note: len(beerBrewerElems) is 506. Last 2 elements irrelevant to Brewer's Name. Cross checked completeness on website.
-#TODO: Add beerNameElems. 
 #TODO: Assign each to variables.
 #TODO: Check for completeness of elements by doing a len/count/enumerate/whatever. All clean data elements should be 250 for popURL
-htmlStrip(beerBrewerElems[2:502])
 
-#TODO: create a function that puts these items into a list
-#TODO: consider putting data in dictionary. 
+#Data Points in type list for POPULAR beers
+beerName = (htmlStrip(beerInfoElems[0::3]))
+beerBrewer = (htmlStrip(beerInfoElems[1::3]))
+beerType = (htmlStrip(beerInfoElems[2::3]))
+beer_ABV = beerABV(popUrl)
+beerScore = (htmlStrip(beerRankElems[2::3]))
+beerRatings = (htmlStrip(beerRankElems[1::3]))
+
+beerPopData = [beerName, beerBrewer, beerType, beer_ABV, beerScore, beerRatings]
+
+def completenessCheck(Data):
+    for i in Data:
+        if (len(i)) == 250:
+            print ("true")
+        else:
+            print ("false")
+
+pprint (completenessCheck(beerPopData))
+
+
+
+
+#TODO: consider putting data in dictionary.
 #list type for writing into .csv or type tuple for SQL? how do files read/write dictionaries? research this

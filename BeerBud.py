@@ -23,13 +23,14 @@ topUrl = 'https://www.beeradvocate.com/lists/top/'
 def requestUrl(url):
     resUrl = requests.get(url)
     resUrl.raise_for_status()
+    #TODO: Save to file & reuse htmlData
     htmlData = bs4.BeautifulSoup(resUrl.text, "lxml")
     return htmlData
 #Function to obtain specific elements from HTML. Both arguments must be strings
 def selectElements(url,selectMethod):
     bsSelectElem = requestUrl(url).select(selectMethod)
     return bsSelectElem
-
+#need to append an empty string for values not found
 def beerABV(url):
     numericRegex = re.compile(r'''
     (\d+\.\d+%)
@@ -42,10 +43,13 @@ def beerABV(url):
 #TODO: Get elements from topUrl
 #Grabs Beer Name, Beer Brewer and Beer Type
 beerInfoElems = selectElements(popUrl,'td a')
+beerInfoElemsTop = selectElements(topUrl,'td a')
 #Grab Beer ABV
 beer_ABV = beerABV(popUrl)
+beer_ABV = beerABV(topUrl)
 #Grabs Rating and Score
 beerRankElems = selectElements(popUrl,'td b')
+beerRankElemsTop = selectElements(topUrl,'td b')
 
 def htmlStrip(elem):
     result = []
@@ -57,10 +61,7 @@ def htmlStrip(elem):
             #print(elemStr)
     return result
 
-#TODO: Assign each to variables.
-#TODO: Check for completeness of elements by doing a len/count/enumerate/whatever. All clean data elements should be 250 for popURL
-
-#Data Points in type list for POPULAR beers
+#Data Points in type list for POPULAR beers:
 beerName = (htmlStrip(beerInfoElems[0::3]))
 beerBrewer = (htmlStrip(beerInfoElems[1::3]))
 beerType = (htmlStrip(beerInfoElems[2::3]))
@@ -68,18 +69,29 @@ beer_ABV = beerABV(popUrl)
 beerScore = (htmlStrip(beerRankElems[2::3]))
 beerRatings = (htmlStrip(beerRankElems[1::3]))
 
+#Data Points in type list TOP beers:
+beerNameTop = ((htmlStrip(beerInfoElemsTop[1::3])))
+beerBrewerTop = ((htmlStrip(beerInfoElemsTop[1::3])))
+beerTypeTop = ((htmlStrip(beerInfoElemsTop[2::3])))
+beer_ABV_Top = beerABV(topUrl)
+beerScoreTop = (htmlStrip(beerRankElemsTop[2::3]))
+beerRatingTop = (htmlStrip(beerRankElemsTop[1::3]))
+
 beerPopData = [beerName, beerBrewer, beerType, beer_ABV, beerScore, beerRatings]
 
+beerTopData = [beerNameTop, beerBrewerTop, beerTypeTop, beer_ABV_Top, beerScoreTop, beerRatingTop]
+
+#All datapoints contain 250 values except for beer_ABV_Top which contains 245
 def completenessCheck(Data):
     for i in Data:
         if (len(i)) == 250:
             print ("true")
+        elif (len(i)) == 245:
+            print ("true")
         else:
             print ("false")
 
-pprint (completenessCheck(beerPopData))
-
-
+pprint (completenessCheck(beerTopData))
 
 
 #TODO: consider putting data in dictionary.

@@ -11,10 +11,12 @@ wbMatrix = openpyxl.load_workbook('2019 Master ITGC Matrix.xlsx')
 warnings.simplefilter("default")
 
 """
-Establishing Dictionary key, value = {'SOC 2 ID': 'SOX ID'}
+Control Dictionary: key, value = {'SOC 2 ID': 'SOX ID'}
 
 The following characters for SOC2ID and SOXID are not allowed in 2019 Master ITGC Matrix spreadsheet: 
 :  \  /  ?  *  [  or  ]
+
+(The above characters are illegal for Excel Tab naming conventions)
 """
 def controlDict():
     soc2ID=[]
@@ -52,7 +54,10 @@ def getFreq():
     
 
 
-"""This is broken and I don't know why"""
+"""This is broken. I can solve this issue but for the sake 
+of time columns A & F in ITGC master can be transposed to
+perform an HLOOKUP across all tabs using SOC2ID as primary key
+"""
 # def getAVM():
 #     wbMatrix.active
 #     ws = wbMatrix["Matrix"]

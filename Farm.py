@@ -91,7 +91,6 @@ def createTemplateTabs():
     shortDesc = getShortDesc()
     keyDesc = getKeyDesc()
     freq = getFreq()
-    aVM = getAVM()
     freqDV = DataValidation(type="list", formula1='"As Needed,Annual,Quarterly,Monthly,Weekly,Daily,Other"', allow_blank=True)
     aVM = DataValidation(type="list", formula1='"Automated/Manual,Automated,Manual"', allow_blank=True)
     impactEnv = DataValidation(type="list", formula1='"Physical Security,Windows,Application,Database,Network,Entity Level,iSeries,Other"', allow_blank=True)

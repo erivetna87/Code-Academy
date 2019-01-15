@@ -11,7 +11,7 @@ wbMatrix = openpyxl.load_workbook('2019 Master ITGC Matrix.xlsx')
 warnings.simplefilter("default")
 
 """
-Establishing Dictionary key, value SOC 2 ID, SOX ID
+Establishing Dictionary key, value = {'SOC 2 ID': 'SOX ID'}
 
 The following characters for SOC2ID and SOXID are not allowed in 2019 Master ITGC Matrix spreadsheet: 
 :  \  /  ?  *  [  or  ]

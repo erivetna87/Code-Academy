@@ -52,14 +52,14 @@ def getFreq():
     
 
 
-"""This breaks and I don't know why"""
-def getAVM():
-    wbMatrix.active
-    ws = wbMatrix["Matrix"]
-    controlAVM=[]
-    for i in ws["I"]:
-        controlAVM.append(i.value)
-    return controlAVM[2:70]
+"""This is broken and I don't know why"""
+# def getAVM():
+#     wbMatrix.active
+#     ws = wbMatrix["Matrix"]
+#     controlAVM=[]
+#     for i in ws["I"]:
+#         controlAVM.append(i.value)
+#     return controlAVM[2:70]
 
 def getKeyDesc():
     wbMatrix.active
